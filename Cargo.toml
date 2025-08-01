@@ -1,5 +1,5 @@
 [package]
-name = "dockerpulltool"
+name = "DockerImageTarDownloadTool"
 version = "0.1.0"
 edition = "2024"
 
