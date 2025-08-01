@@ -7,6 +7,9 @@ Download docker image tar file from hub.docker.com and ghcr.io.
 3. (*optional*) set proxy env. HTTP_PROXY and HTTPS_PROXY. In powershell, it should be `$env:HTTP_PROXY="http://127.0.0.1:7890"; $env:HTTPS_PROXY="http://127.0.0.1:7890"`.
 4. Run `./DockerImageTarDownloadTool [registry/][repository/]image[:tag|@digest]`. For example `./DockerImageTarDownloadTool.exe ghcr.io/mailu/nginx:2024.06`
 5. image.tar will at the terminal current workspace dir.
+6. docker load image.tar. `docker load < image.tar`.
+
+
 # note
 1. By default, tool use dockerhub registry, so simply usage is `./DockerImageTarDownloadTool nginx:latest`.
 2. Each layer download timeout is `300s`
