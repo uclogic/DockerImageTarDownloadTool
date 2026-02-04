@@ -1,6 +1,5 @@
 name: Build Multi-Platform Binaries
 
-
 on:
   push:
     tags:
@@ -9,8 +8,7 @@ on:
 
 jobs:
   build:
-    permissions: write-all
-    name: Build (${{ matrix.os }})
+    name: Build (${{ matrix.target }})
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -19,11 +17,9 @@ jobs:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             ext: .exe
-
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             ext: ""
-
           - os: macos-latest
             target: aarch64-apple-darwin
             ext: ""
@@ -39,20 +35,16 @@ jobs:
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
 
-      - name: Rename binary
+      - name: Prepare Artifact
         shell: bash
         run: |
           mkdir dist
           cp target/${{ matrix.target }}/release/DockerImageTarDownloadTool${{ matrix.ext }} \
              dist/imagedowntool-${{ matrix.target }}${{ matrix.ext }}
 
-      - name: Upload artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.target }}
+          name: binaries-${{ matrix.target }}
           path: dist/*
-
-      - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist/*
+          retention-days: 5
