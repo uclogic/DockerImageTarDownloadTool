@@ -41,7 +41,7 @@ jobs:
         shell: bash
         run: |
           mkdir dist
-          cp target/${{ matrix.target }}/release/myapp${{ matrix.ext }} \
+          cp target/${{ matrix.target }}/release/DockerImageTarDownloadTool${{ matrix.ext }} \
              dist/imagedowntool-${{ matrix.target }}${{ matrix.ext }}
 
       - name: Upload artifact
