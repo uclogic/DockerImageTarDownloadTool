@@ -1,7 +1,5 @@
 name: Build Multi-Platform Binaries
 
-permissions:
-  contents: write
 
 on:
   push:
